@@ -20,3 +20,15 @@ class DongSocket:
         data_length_header = encoded_encoded_data_length.ljust(DongSocket.HEADER, b' ')
         self.socket.send(data_length_header)
         self.socket.send(encoded_data)
+
+    def receive(self, conn: socket = None) -> any:
+        connection = conn if conn is not None else self.socket
+
+        # get message length
+        msg_length_str: str = connection.recv(DongSocket.HEADER).decode(DongSocket.FORMAT)
+        msg_length: int = int(msg_length_str) if msg_length_str else 0
+
+        # get message
+        msg = connection.recv(msg_length).decode(DongSocket.FORMAT)
+
+        return json.loads(msg)
