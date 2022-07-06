@@ -10,24 +10,19 @@ class Server(DongSocket):
         self.socket.bind((self.server_ip, DongSocket.PORT))
 
     def start(self):
-        self.server.listen()
+        self.socket.listen()
         print(f'[LISTENING] Server is listening on {self.server_ip}')
         while True:
-            conn, addr = self.server.accept()
+            conn, addr = self.socket.accept()
             thread = Thread(target=self.handle_client, args=(conn, addr), daemon=True)
             thread.start()
 
-    @staticmethod
-    def handle_client(conn: socket, addr: str):
+    def handle_client(self, conn: socket, addr: str):
         print(f"[NEW CONNECTION] {addr} connected.")
 
         while True:
-            # get message length
-            msg_length_str: str = conn.recv(DongSocket.HEADER).decode(DongSocket.FORMAT)
-            msg_length: int = int(msg_length_str) if msg_length_str else 0
-
             # get message
-            msg = conn.recv(msg_length).decode(DongSocket.FORMAT)
+            msg = self.receive(conn=conn)
             if msg == DongSocket.DISCONNECT_MESSAGE:
                 break
 
