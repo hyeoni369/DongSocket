@@ -22,7 +22,7 @@ class Server(DongSocket):
 
         while True:
             # get message
-            msg = self.receive(conn=conn)
+            msg = self.receive(connection=conn)
             if msg == DongSocket.DISCONNECT_MESSAGE:
                 break
 
