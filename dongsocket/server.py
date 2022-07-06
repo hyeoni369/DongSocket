@@ -7,9 +7,7 @@ from dongsocket.dongsocket import DongSocket
 class Server(DongSocket):
     def __init__(self, server_ip: str):
         super(Server, self).__init__(server_ip)
-
-        self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.server.bind((self.server_ip, DongSocket.PORT))
+        self.socket.bind((self.server_ip, DongSocket.PORT))
 
     def start(self):
         self.server.listen()

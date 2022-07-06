@@ -1,3 +1,6 @@
+import socket
+
+
 class DongSocket:
     HEADER = 64
     PORT = 5050
@@ -6,3 +9,4 @@ class DongSocket:
 
     def __init__(self, server_ip: str):
         self.server_ip: str = server_ip
+        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
