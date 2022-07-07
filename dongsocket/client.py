@@ -1,5 +1,3 @@
-import socket
-
 from dongsocket.dongsocket import DongSocket
 
 

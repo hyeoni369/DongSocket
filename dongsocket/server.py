@@ -18,7 +18,7 @@ class Server(DongSocket):
             thread.start()
 
     def handle_client(self, conn: socket, addr: str):
-        print(f"[NEW CONNECTION] {addr} connected.")
+        print(f'[NEW CONNECTION] {addr} connected.')
 
         while True:
             # get message
